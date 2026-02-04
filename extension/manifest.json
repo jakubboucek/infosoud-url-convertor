@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "InfoSoud URL Fixer",
+  "version": "1.0.0",
+  "description": "Automaticky přesměruje staré InfoSoud URL (justice.cz) na nové (gov.cz)",
+  "homepage_url": "https://github.com/jakubboucek/infosoud-url-convertor",
+  "permissions": ["declarativeNetRequest", "tabs"],
+  "host_permissions": ["https://infosoud.justice.cz/*", "https://infosoud-fixer.web.app/*"],
+  "declarative_net_request": {
+    "rule_resources": [{
+      "id": "ruleset_1",
+      "enabled": true,
+      "path": "rules.json"
+    }]
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
