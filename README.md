@@ -30,12 +30,18 @@ Migrace InfoSoudu ze strany Ministerstva na novou doménu bohužel zcela popír�
    → Musíte ručně znovu vyplnit všechny údaje a hledat řízení
 ```
 
+https://github.com/user-attachments/assets/cc874cbd-8373-4871-afcf-ffb856d01760
+
+
 ### Po instalaci rozšíření:
 ```
 ✅ Kliknete na starý odkaz 
    → Automaticky přesměrováno přímo na detail konkrétního řízení
    → Žádné ruční vyhledávání není potřeba
 ```
+
+https://github.com/user-attachments/assets/d761a88d-c1ea-4abb-8a11-181caea35909
+
 
 **Rozšíření zachovává původní funkčnost** - přímý přístup k detailu konkrétního soudního řízení, tak jak to bylo před migrací.
 
