@@ -1,0 +1,1 @@
+function e(){return Math.random().toString(16).slice(-4)}function t(r){return`${r}-${e()}${e()}-${e()}-${e()}-${e()}-${e()}${e()}${e()}`}function n(r){return typeof r!="string"?r:r.normalize("NFD").replace(/[\u0300-\u036f]/g,"")}function i(r){return typeof r!="string"?r:r.split(/(\s+)/)}export{e as a,t as b,n as c,i as d};

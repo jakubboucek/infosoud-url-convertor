@@ -1,0 +1,1 @@
+var n=class{nadrizenaOrganizace="";organizace="";udalosti=[];jednaciSin="";datum="";typ=null;platneK=new Date};var e=class{druhOrganizace=void 0;okresniSoud=void 0;jednaciSin=void 0;datumJednani=void 0;cisloSenatu=void 0;druhVeci=void 0;bcVec=void 0;rocnik=void 0;typHledani=null};export{n as a,e as b};

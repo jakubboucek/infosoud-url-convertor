@@ -1,0 +1,1 @@
+import{a as r}from"./chunk-U6RUF4PF.js";import{a as s}from"./chunk-IQJXNMFO.js";import{e as o}from"./chunk-6RTS56CQ.js";var t=o(r,["NEUTRAL","ERROR","WARNING","SUCCESS"]);o(s,["_XS","_S","_M","_L","_XL"]);var S={root:"gov-form-message",content:"gov-form-message__content"};export{t as a,S as b};

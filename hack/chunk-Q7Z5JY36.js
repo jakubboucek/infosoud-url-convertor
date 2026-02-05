@@ -1,0 +1,1 @@
+import{a as r}from"./chunk-U6RUF4PF.js";import{a as s}from"./chunk-IQJXNMFO.js";import{e as t}from"./chunk-6RTS56CQ.js";var n=t(r,["PRIMARY","NEUTRAL"]),T=t(s,["_S","_M","_L"]),a=(function(o){return o.TOP="top",o.RIGHT="right",o.BOTTOM="bottom",o.LEFT="left",o})(a||{}),e={root:"gov-tooltip"},m={root:"gov-tooltip-content"};export{n as a,T as b,a as c,e as d,m as e};

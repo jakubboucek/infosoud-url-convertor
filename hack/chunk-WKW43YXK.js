@@ -1,0 +1,1 @@
+import{a as o}from"./chunk-IQJXNMFO.js";import{e as t}from"./chunk-6RTS56CQ.js";var p=t(o,["_XS","_S","_M","_L","_XL"]),a={root:"gov-form-autocomplete",list:"gov-form-autocomplete__list",item:"gov-form-autocomplete__item",empty:"gov-form-autocomplete__item--empty",loading:"gov-form-autocomplete__item--loading"};export{p as a,a as b};
