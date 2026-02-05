@@ -1,3 +1,4 @@
+
 /**
  * InfoSoud URL Converter - JavaScript verze
  *
@@ -7,95 +8,161 @@
 import courtMapping from './court_mapping.json' with {type: 'json'};
 
 /**
- * Převede parametry ze staré URL na nové
+ * Pomocná funkce pro vyřešení organizace (OS vs KS/MS/VS).
+ * Vrací objekt s parametry pro URL.
+ */
+function resolveOrganizationLogic(orgValue) {
+    const result = {
+        druhOrganizace: null,
+        okresniSoud: null
+    };
+
+    if (!orgValue) return result;
+
+    if (orgValue.startsWith('OS')) {
+        // Je to okresní soud -> musíme najít nadřízenou organizaci
+        const parentOrg = courtMapping[orgValue];
+
+        // Pokud nemáme mapování, použijeme org jako fallback, ale správně by to mělo být v mapě
+        result.druhOrganizace = parentOrg || orgValue;
+        result.okresniSoud = orgValue;
+    } else {
+        // Je to krajský/městský/vrchní soud -> použijeme přímo
+        result.druhOrganizace = orgValue;
+        result.okresniSoud = null; // U KS se okresní soud nepřidává
+    }
+
+    return result;
+}
+
+/**
+ * Sdílená transformace základních parametrů, které jsou stejné pro obě URL.
+ */
+function applyCommonTransforms(oldParams, newParams) {
+    // 1. Číslo senátu (beze změny)
+    if (oldParams.has('cisloSenatu')) {
+        newParams.set('cisloSenatu', oldParams.get('cisloSenatu'));
+    }
+
+    // 2. Bc věc (beze změny)
+    if (oldParams.has('bcVec')) {
+        newParams.set('bcVec', oldParams.get('bcVec'));
+    }
+
+    // 3. Ročník (beze změny)
+    if (oldParams.has('rocnik')) {
+        newParams.set('rocnik', oldParams.get('rocnik'));
+    }
+
+    // 4. Druh věci -> Druh věci (Změna názvu parametru!)
+    if (oldParams.has('druhVec')) {
+        newParams.set('druhVeci', oldParams.get('druhVec'));
+    }
+}
+
+/**
+ * Původní funkce pro DETAIL ŘÍZENÍ (search.do -> detail-rizeni)
  * @param {URLSearchParams} params
  */
-export function convertParameters(params) {
-    const org = params.get('org') || '';
-    const krajOrg = params.get('krajOrg') || 'VSECHNY_KRAJE';
-
+export function convertDetailParameters(params) {
     const newParams = new URLSearchParams();
 
-    // 1. typOrganizace (vždy)
-    newParams.set('typOrganizace', krajOrg || 'VSECHNY_KRAJE');
-
-    // 2. druhOrganizace (logika podle typu soudu)
-    const druhOrganizace = getDruhOrganizace(org, krajOrg);
-
-    if (!druhOrganizace) {
-        throw new Error(`Nelze určit druhOrganizace pro org: '${org}'.`)
+    // 1. Typ organizace (krajOrg -> typOrganizace)
+    if (params.has('krajOrg')) {
+        const krajOrg = params.get('krajOrg');
+        // Pokud je krajOrg "VSECHNY_KRAJE" nebo jiná hodnota, použijeme ji
+        newParams.set('typOrganizace', krajOrg === 'null' ? 'VSECHNY_KRAJE' : krajOrg);
+    } else {
+        // Default pokud chybí
+        newParams.set('typOrganizace', 'VSECHNY_KRAJE');
     }
 
-    newParams.set('druhOrganizace', druhOrganizace);
+    // 2. Řešení ORG (Insolvence vs Soudy)
+    const org = params.get('org');
 
-    // 3. okresniSoud (pouze pro okresní soudy)
-    if (isOkresniSoud(org)) {
-        newParams.set('okresniSoud', org);
+    if (!org) {
+        // Insolvence nebo nevyplněno -> vezmeme z krajOrg
+        const krajOrg = params.get('krajOrg');
+        if (krajOrg) {
+            newParams.set('druhOrganizace', krajOrg);
+        }
+    } else {
+        // Standardní soudy
+        const orgInfo = resolveOrganizationLogic(org);
+        if (orgInfo.druhOrganizace) newParams.set('druhOrganizace', orgInfo.druhOrganizace);
+        if (orgInfo.okresniSoud) newParams.set('okresniSoud', orgInfo.okresniSoud);
     }
 
-    // 4. Přímé převody
-    const cisloSenatu = params.get('cisloSenatu');
-    if (cisloSenatu) {
-        newParams.set('cisloSenatu', cisloSenatu);
-    }
-
-    const druhVec = params.get('druhVec');
-    if (druhVec) {
-        // Pozor: druhVec -> druhVeci
-        newParams.set('druhVeci', druhVec);
-    }
-
-    const bcVec = params.get('bcVec');
-    if (bcVec) {
-        newParams.set('bcVec', bcVec);
-    }
-
-    const rocnik = params.get('rocnik');
-    if (rocnik) {
-        newParams.set('rocnik', rocnik);
-    }
+    // 3. Společné parametry
+    applyCommonTransforms(params, newParams);
 
     return newParams;
 }
 
 /**
- * Určí druhOrganizace podle typu soudu
+ * Nová funkce pro DETAIL UDÁLOSTI (list.do -> detail-udalosti)
+ * @param {URLSearchParams} params
  */
-function getDruhOrganizace(org, krajOrg) {
-    // Případ 1: org je prázdné -> insolvence -> použít krajOrg
-    if (!org || org === '') {
-        return krajOrg;
+export function convertEventParameters(params) {
+    const newParams = new URLSearchParams();
+
+    // 1. Typ organizace (kraj -> typOrganizace)
+    // Pozor: Zde se parametr jmenuje 'kraj', nikoliv 'krajOrg'
+    const kraj = params.get('kraj');
+    if (kraj && kraj !== 'null') {
+        newParams.set('typOrganizace', kraj);
+    } else {
+        newParams.set('typOrganizace', 'VSECHNY_KRAJE');
     }
 
-    // Případ 2: org je krajský/městský/vrchní soud -> použít přímo org
-    if (isKrajskySoud(org)) {
-        return org;
+    // 2. Řešení ORG a organizaceId
+    const org = params.get('org');
+    if (org) {
+        const orgInfo = resolveOrganizationLogic(org);
+
+        if (orgInfo.druhOrganizace) newParams.set('druhOrganizace', orgInfo.druhOrganizace);
+        if (orgInfo.okresniSoud) newParams.set('okresniSoud', orgInfo.okresniSoud);
+
+        // NOVINKA pro Událost: Vždy se přidává organizaceId rovné původnímu org
+        newParams.set('organizaceId', org);
     }
 
-    // Případ 3: org je okresní soud -> vyhledat v mapování
-    if (isOkresniSoud(org)) {
-        const mapped = courtMapping[org];
-        if (!mapped) {
-            throw new Error(`Chybí mapování pro okresní soud: '${org}'.`);
-        }
-
-        return mapped;
+    // 3. Specifické parametry události
+    if (params.has('druhUdalosti')) {
+        newParams.set('druhUdalosti', params.get('druhUdalosti'));
     }
 
-    // Neznámý typ soudu
-    throw new Error(`Neznámý typ soudu: '${org}'.`);
+    if (params.has('poradiUdalosti')) {
+        newParams.set('poradiUdalosti', params.get('poradiUdalosti'));
+    }
+
+    // 4. Společné parametry
+    applyCommonTransforms(params, newParams);
+
+    return newParams;
 }
 
 /**
- * Kontrola, zda je kód okresní soud
+ * Převede parametry určené pro detail události na parametry pro detail řízení.
+ * Předpokládá, že vstupem jsou již modernizované parametry z funkce convertEventParameters().
+ * * @param {URLSearchParams} eventParams - Parametry po průchodu funkcí convertEventParameters
  */
-function isOkresniSoud(kod) {
-    return kod && kod.startsWith('OS');
-}
+export function convertEventToDetailParameters(eventParams) {
+    // Vytvoříme kopii, abychom nezměnili původní objekt
+    const detailParams = new URLSearchParams(eventParams);
 
-/**
- * Kontrola, zda je kód krajský/městský/vrchní soud
- */
-function isKrajskySoud(kod) {
-    return kod && (kod.startsWith('KS') || kod.startsWith('MS') || kod.startsWith('VS'));
+    // 1. Odstraníme parametry, které detail řízení nezná
+    // Tyto parametry jsou specifické jen pro konkrétní událost
+    detailParams.delete('druhUdalosti');
+    detailParams.delete('poradiUdalosti');
+
+    // 2. Odstraníme 'organizaceId'
+    // Detail řízení tento parametr nepoužívá (používá jen druhOrganizace/okresniSoud,
+    // které už jsou v objektu správně nastaveny z předchozího kroku)
+    detailParams.delete('organizaceId');
+
+    // Vše ostatní (cisloSenatu, bcVec, rocnik, druhVeci, typOrganizace,
+    // druhOrganizace, okresniSoud) necháme tak, jak je.
+
+    return detailParams;
 }

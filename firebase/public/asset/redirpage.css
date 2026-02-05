@@ -1,0 +1,194 @@
+/* Moderní reset a nastavení výšky */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    /* Flexbox pro vycentrování obsahu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    width: 90%;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #0056b3;
+}
+
+h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #1a88ff;
+}
+
+p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* Jednoduchý CSS spinner */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0056b3;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.container.error .loader {
+    animation: none;
+    border: 4px solid #ff4d4f;
+}
+
+.container.done .loader {
+    animation: none;
+    border: 4px solid #f3f3f3;
+}
+
+.container.done .only-progress {
+    display: none;
+}
+
+/* Footer pro případ, že by skript selhal */
+.fallback {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.fallback .choose strong {
+    color: black;
+}
+
+.choose .msg {
+    display: flex;
+    gap: 1em;
+}
+
+.choose .msg div:first-child {
+    font-size: 3rem;
+}
+
+.choose p {
+    margin-bottom: 1em;
+    font-size: inherit;
+    color: inherit;
+}
+
+.choose .msg p {
+    text-align: left;
+}
+
+.choose .links {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0.5em;
+    margin-bottom: 2em;
+}
+
+.container.error .fallback {
+    color: #ff4d4f;
+    font-weight: bold;
+}
+
+.progress-container {
+    width: 100%;
+    height: 8px;
+    background-color: #eee;
+    border-radius: 10px;
+    overflow: hidden; /* Aby vnitřek nepřetékal přes zaoblení */
+    margin-top: 2em;
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    width: 0; /* Výchozí stav */
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #00d2ff);
+    border-radius: 10px;
+    transition: width 0.7s ease-out; /* Plynulý pohyb zleva doprava */
+}
+
+footer {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+}
+
+footer a {
+    color: #aaa;
+}
+
+/* Základní styl společný pro obě tlačítka */
+.btn {
+    display: inline-block;      /* Aby odkaz respektoval padding a rozměry */
+    padding: 6px 15px;         /* Vnitřní odsazení (výška, šířka) */
+    text-decoration: none;      /* Odstraní podtržení odkazu */
+    font-family: sans-serif;    /* Nebo použij font, který máš na webu */
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;         /* Jemně zakulacené rohy */
+    cursor: pointer;
+    transition: all 0.2s ease;  /* Plynulá animace při najetí */
+    text-align: center;
+}
+
+/* --- PRIMÁRNÍ TLAČÍTKO (Hlavní akce) --- */
+.btn-primary {
+    background-color: #0056b3;  /* Tmavší modrá jako základ */
+    color: #ffffff;             /* Bílé písmo */
+    border: 1.5px solid #0056b3;  /* Rámeček stejné barvy */
+}
+
+.btn-primary:hover {
+    background-color: #1a88ff;  /* Světlejší modrá při najetí */
+    /*border-color: #1a88ff;*/
+}
+
+/* --- SEKUNDÁRNÍ TLAČÍTKO (Vedlejší akce) --- */
+.btn-secondary {
+    background-color: transparent; /* Průhledné pozadí */
+    color: #0056b3;                /* Text tmavě modrý */
+    border: 1.5px solid #0056b3;     /* Rámeček tmavě modrý */
+}
+
+.btn-secondary:hover {
+    background-color: #1a88ff;     /* Při najetí se vyplní */
+    color: #ffffff;                /* Text zbělá */
+}
+
+/* Volitelné: Mezera mezi tlačítky, pokud jsou vedle sebe */
+.button-group .btn + .btn {
+    margin-left: 10px;
+}

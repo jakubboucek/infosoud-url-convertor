@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "scheme": "https",
+          "host": "infosoud-fixer.web.app",
+          "path": "/detail"
+        }
+      }
+    },
+    "condition": {
+      "urlFilter": "||infosoud.justice.cz/InfoSoud/public/search.do",
+      "resourceTypes": ["main_frame"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "scheme": "https",
+          "host": "infosoud-fixer.web.app",
+          "path": "/udalost"
+        }
+      }
+    },
+    "condition": {
+      "urlFilter": "||infosoud.justice.cz/InfoSoud/public/list.do",
+      "resourceTypes": ["main_frame"]
+    }
+  }
+]

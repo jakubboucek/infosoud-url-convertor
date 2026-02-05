@@ -20,19 +20,20 @@
   },
   {
     "id": 2,
-    "priority": 2,
+    "priority": 1,
     "action": {
       "type": "redirect",
       "redirect": {
         "transform": {
-          "scheme": "https",
-          "host": "infosoud-fixer.web.app",
-          "path": "/detail"
+          "scheme": "http",
+          "host": "127.0.0.1",
+          "port": "5000",
+          "path": "/udalost"
         }
       }
     },
     "condition": {
-      "urlFilter": "||infosoud.justice.cz/InfoSoud/public/search.do",
+      "urlFilter": "||infosoud.justice.cz/InfoSoud/public/list.do",
       "resourceTypes": ["main_frame"]
     }
   }

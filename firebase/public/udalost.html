@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoSoud Redirector</title>
     <link rel="stylesheet" href="/asset/redirpage.css">
-    <script type="module" src="/asset/detail.js"></script>
+    <script type="module" src="/asset/udalost.js"></script>
 </head>
 <body>
 
@@ -13,7 +13,7 @@
     <h1 style="margin-bottom: 0;">InfoSoud</h1>
     <h2 style="margin-bottom: 1.5rem;">přesměrování na novou adresu</h2>
     <div class="loader"></div>
-    <p style="margin-top: 1.5rem;">Pracuji na opravě starého odkazu InfoSoud.<br>Za okamžik vás přesměruji na správnou
+    <p class="only-progress" style="margin-top: 1.5rem;">Pracuji na opravě starého odkazu InfoSoud.<br>Za okamžik vás přesměruji na správnou
         stránku.</p>
 
     <div class="progress-container">
@@ -23,6 +23,24 @@
     <div class="fallback" id="fallback-msg">
         Pokud přesměrování trvá příliš dlouho, zkontrolujte prosím připojení.
     </div>
+
+    <template id="result">
+        <div class="choose">
+            <div class="msg">
+                <div>⚠️</div>
+                <div>
+                    <p><strong>Houstone, máme problém!</strong> Soud při migraci přečísloval parametry v URL a to už neumíme opravit automaticky.<br>
+                    Můžete zkusit pokračovat na událost, ale je možné, že se zobrazí nesprávná data.</p>
+                </div>
+            </div>
+            <p>Nabízíme ale možnost přejít na přehled celého řízení,<br> kde danou událost můžete vyhledat znovu:</p>
+            <div class="links">
+                <a class="btn btn-primary" id="udalost-link">konkrétní událost</a>
+                <a class="btn btn-secondary" id="detail-link">přehled celého řízení</a>
+            </div>
+        </div>
+    </template>
+
     <footer>
         Autor: <a href="https://www.jakub-boucek.cz/" target="_blank">Jakub Bouček</a> |
         <a href="https://github.com/jakubboucek/infosoud-url-convertor" target="_blank">informace o projektu</a> |
