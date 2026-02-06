@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "description": "Automaticky přesměruje staré InfoSoud URL (justice.cz) na nové (gov.cz)",
   "homepage_url": "https://github.com/jakubboucek/infosoud-url-convertor",
-  "permissions": ["declarativeNetRequest", "tabs"],
+  "permissions": ["declarativeNetRequest"],
   "host_permissions": ["https://infosoud.justice.cz/*", "https://infosoud-fixer.web.app/*"],
   "declarative_net_request": {
     "rule_resources": [{
