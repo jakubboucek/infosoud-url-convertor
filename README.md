@@ -47,30 +47,38 @@ https://github.com/user-attachments/assets/d761a88d-c1ea-4abb-8a11-181caea35909
 
 ## 🚀 Instalace
 
-Rozšíření není dostupné v Chrome Web Store, proto je nutné nainstalovat ho ručně:
+### Instalace z Chrome Web Store (doporučeno)
 
-### Krok 1: Stažení rozšíření
+Rozšíření nainstalujte na stránce **[InfoSoud URL Convertor – Google Chrome Web Store](https://chromewebstore.google.com/detail/infosoud-url-fixer/hkmfgajjhipmieandfbmpkkbbkfgeddk?hl=cs)**.
 
-1. Přejděte na [stránku Releases](https://github.com/jakubboucek/infosoud-url-convertor/releases)
-2. Stáhněte nejnovější verzi (soubor `infosoud-url-fixer.zip`)
-3. Rozbalte stažený ZIP soubor do libovolné složky na vašem počítači
+### Instalace ze zdrojových kódu (odbornější způsob)
+<details>
+  <summary>Pokud z nějakého důvodu nemůžete použít Chrome Web Store, můžete rozšíření nainstalovat ručně ze zdrojových kódů:</summary>
 
-### Krok 2: Instalace do Chrome
+  > ### Krok 1: Stažení rozšíření
+  > 
+  > 1. Přejděte na [stránku Releases](https://github.com/jakubboucek/infosoud-url-convertor/releases)
+  > 2. Stáhněte nejnovější verzi (soubor `infosoud-url-fixer.zip`)
+  > 3. Rozbalte stažený ZIP soubor do libovolné složky na vašem počítači
+  > 
+  > ### Krok 2: Instalace do Chrome
+  > 
+  > 1. Otevřete Chrome a přejděte na `chrome://extensions/`
+  > 2. V pravém horním rohu **zapněte "Režim pro vývojáře"** (Developer mode)
+  > 3. Klikněte na tlačítko **"Načíst rozšíření bez balíčku"** (Load unpacked)
+  > 4. Vyberte složku, do které jste rozbalili ZIP soubor
+  > 5. Rozšíření se nainstaluje a začne automaticky fungovat
+  > 
+  > ### Krok 3: Ověření funkčnosti
+  > 
+  > Vyzkoušejte jakýkoliv starý InfoSoud odkaz, například:
+  > ```
+  > https://infosoud.justice.cz/InfoSoud/public/search.do?type=spzn&typSoudu=os&krajOrg=KSZPCPM&org=OSZPCPM&cisloSenatu=32&druhVec=T&bcVec=61&rocnik=2025&spamQuestion=23&agendaNc=CIVIL
+  > ```
+  > 
+  > Měli byste být **automaticky přesměrováni** na novou adresu na doméně `infosoud.gov.cz`.
 
-1. Otevřete Chrome a přejděte na `chrome://extensions/`
-2. V pravém horním rohu **zapněte "Režim pro vývojáře"** (Developer mode)
-3. Klikněte na tlačítko **"Načíst rozšíření bez balíčku"** (Load unpacked)
-4. Vyberte složku, do které jste rozbalili ZIP soubor
-5. Rozšíření se nainstaluje a začne automaticky fungovat
-
-### Krok 3: Ověření funkčnosti
-
-Vyzkoušejte jakýkoliv starý InfoSoud odkaz, například:
-```
-https://infosoud.justice.cz/InfoSoud/public/search.do?type=spzn&typSoudu=os&krajOrg=KSZPCPM&org=OSZPCPM&cisloSenatu=32&druhVec=T&bcVec=61&rocnik=2025&spamQuestion=23&agendaNc=CIVIL
-```
-
-Měli byste být **automaticky přesměrováni** na novou adresu na doméně `infosoud.gov.cz`.
+</details>
 
 ## 🔧 Jak to funguje
 
@@ -109,12 +117,13 @@ Celý proces trvá zlomek sekundy a je plně automatický.
 ### Některé odkazy se nepřesměrovávají
 
 1. Zkontrolujte, že odkaz skutečně vede na `infosoud.justice.cz`
-2. Ujistěte se, že URL obsahuje cestu `/InfoSoud/public/search.do`
+2. Ujistěte se, že URL obsahuje cestu `/InfoSoud/public/search.do` nebo `/InfoSoud/public/list.do`
 3. Nahlaste problém v [Issues](https://github.com/jakubboucek/infosoud-url-convertor/issues)
 
 ### Přesměrování nefunguje v jiném prohlížeči
 
-Rozšíření je vytvořeno **pouze pro Google Chrome** a prohlížeče založené na Chromium (Edge, Brave, Opera). Ve Firefoxu nebo Safari nefunguje.
+Rozšíření je vytvořeno **pouze pro Google Chrome** a prohlížeče založené na Chromium (Edge, Brave, Opera).
+Ve Firefoxu nebo Safari nefunguje.
 
 ## 💬 Hlášení chyb a návrhy
 
