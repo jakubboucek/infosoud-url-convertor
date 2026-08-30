@@ -7,7 +7,7 @@
 
 2. Data Processing (Redirection)
 
-    The sole function of this extension is to detect outdated InfoSoud links (`justice.cz` domain). Due to technical limitations of Manifest V3, the conversion of old URLs to the new format is facilitated via a static web page `infosoud-fixer.web.app`.
+    The sole function of this extension is to detect outdated InfoSoud and InfoDeska links (`justice.cz` domains). Due to technical limitations of Manifest V3, the conversion of old URLs to the new format is facilitated via a static web page `infosoud-fixer.web.app`.
 
     This page is hosted on the Firebase platform (Google).
 
@@ -27,7 +27,7 @@
 
 2. Zpracování dat (Přesměrování)
 
-    Jedinou funkcí rozšíření je detekce nefunkčních odkazů aplikace InfoSoud (doména `justice.cz`). Kvůli technickým omezením Manifestu V3 probíhá převod starého odkazu na nový formát prostřednictvím statické webové stránky `infosoud-fixer.web.app`.
+    Jedinou funkcí rozšíření je detekce nefunkčních odkazů aplikací InfoSoud a InfoDeska (domény `justice.cz`). Kvůli technickým omezením Manifestu V3 probíhá převod starého odkazu na nový formát prostřednictvím statické webové stránky `infosoud-fixer.web.app`.
 
     Tato stránka je hostována na platformě Firebase (Google).
 
