@@ -79,7 +79,7 @@ Rozšíření nainstalujte na stránce **[InfoSoud URL Convertor – Google Chro
   > https://infodeska.justice.cz/subjekt.aspx?subjkod=202120
   > ```
   > 
-  > Měli byste být **automaticky přesměrováni** na novou adresu na doméně `infosoud.gov.cz`.
+  > Měli byste být **automaticky přesměrováni** na odpovídající novou adresu na doméně `infosoud.gov.cz` nebo `infodeska.gov.cz`.
 
 </details>
 
