@@ -36,5 +36,62 @@
       "urlFilter": "||infosoud.justice.cz/InfoSoud/public/list.do",
       "resourceTypes": ["main_frame"]
     }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "scheme": "http",
+          "host": "127.0.0.1",
+          "port": "5000",
+          "path": "/infodeska/subjekt"
+        }
+      }
+    },
+    "condition": {
+      "urlFilter": "||infodeska.justice.cz/subjekt.aspx",
+      "resourceTypes": ["main_frame"]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "scheme": "http",
+          "host": "127.0.0.1",
+          "port": "5000",
+          "path": "/infodeska/vyveseni"
+        }
+      }
+    },
+    "condition": {
+      "urlFilter": "||infodeska.justice.cz/vyveseni.aspx",
+      "resourceTypes": ["main_frame"]
+    }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "scheme": "http",
+          "host": "127.0.0.1",
+          "port": "5000",
+          "path": "/infodeska/soubor"
+        }
+      }
+    },
+    "condition": {
+      "urlFilter": "||infodeska.justice.cz/soubor.aspx",
+      "resourceTypes": ["main_frame"]
+    }
   }
 ]

@@ -6,6 +6,8 @@
 
 Ministerstvo spravedlnosti ČR v roce 2026 provedlo migraci aplikace InfoSoud z domény `infosoud.justice.cz` na novou doménu `infosoud.gov.cz`. Bohužel byla migrace provedena **bez zachování zpětné kompatibility** - staré odkazy přestaly fungovat.
 
+Stejný problém postihl i **úřední desku InfoDeska** - ta byla migrována z domény `infodeska.justice.cz` na `infodeska.gov.cz`, opět bez zachování starých odkazů. Rozšíření proto opravuje i odkazy na InfoDesku.
+
 Tento projekt řeší vzniklý problém tím, že **automaticky opravuje nefunkční odkazy** a přesměrovává je na správnou novou adresu.
 
 ## 🎯 Pro koho je to určeno
@@ -71,9 +73,10 @@ Rozšíření nainstalujte na stránce **[InfoSoud URL Convertor – Google Chro
   > 
   > ### Krok 3: Ověření funkčnosti
   > 
-  > Vyzkoušejte jakýkoliv starý InfoSoud odkaz, například:
+  > Vyzkoušejte jakýkoliv starý InfoSoud nebo InfoDeska odkaz, například:
   > ```
   > https://infosoud.justice.cz/InfoSoud/public/search.do?type=spzn&typSoudu=os&krajOrg=KSZPCPM&org=OSZPCPM&cisloSenatu=32&druhVec=T&bcVec=61&rocnik=2025&spamQuestion=23&agendaNc=CIVIL
+  > https://infodeska.justice.cz/subjekt.aspx?subjkod=202120
   > ```
   > 
   > Měli byste být **automaticky přesměrováni** na novou adresu na doméně `infosoud.gov.cz`.
@@ -93,11 +96,19 @@ Celý proces trvá zlomek sekundy a je plně automatický.
 
 ## 📊 Co rozšíření podporuje
 
+### InfoSoud
+
 - ✅ **Všechny okresní soudy** (86 soudů) - automatické mapování na nadřízené organizace
 - ✅ **Krajské soudy** - včetně odvolacích řízení
 - ✅ **Městské soudy**
 - ✅ **Insolvence** - správné zpracování insolvenčních řízení
 - ✅ **Všechny typy řízení** - civilní, trestní, obchodní, exekuční, atd.
+
+### InfoDeska
+
+- ✅ **Úřední deska subjektu** (`subjekt.aspx`) - plné přesměrování na desku organizace
+- ✅ **Vyvěšené dokumenty** (`vyveseni.aspx`) - přesměrování přes zástupný kód organizace
+- ❌ **Přímé odkazy na soubory** (`soubor.aspx`) - nelze převést (nový systém používá neodvoditelné identifikátory), rozšíření zobrazí vysvětlení s odkazem na novou InfoDesku
 
 ## 🔒 Soukromí a bezpečnost
 
@@ -116,8 +127,10 @@ Celý proces trvá zlomek sekundy a je plně automatický.
 
 ### Některé odkazy se nepřesměrovávají
 
-1. Zkontrolujte, že odkaz skutečně vede na `infosoud.justice.cz`
-2. Ujistěte se, že URL obsahuje cestu `/InfoSoud/public/search.do` nebo `/InfoSoud/public/list.do`
+1. Zkontrolujte, že odkaz skutečně vede na `infosoud.justice.cz` nebo `infodeska.justice.cz`
+2. Ujistěte se, že URL obsahuje jednu z podporovaných cest:
+   - `infosoud.justice.cz`: `/InfoSoud/public/search.do` nebo `/InfoSoud/public/list.do`
+   - `infodeska.justice.cz`: `/subjekt.aspx`, `/vyveseni.aspx` nebo `/soubor.aspx`
 3. Nahlaste problém v [Issues](https://github.com/jakubboucek/infosoud-url-convertor/issues)
 
 ### Přesměrování nefunguje v jiném prohlížeči
